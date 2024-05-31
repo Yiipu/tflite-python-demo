@@ -2,10 +2,11 @@ import unittest
 from PIL import Image
 import numpy as np
 from checkdown.models import tfliteModel
+from checkdown import utils
 
 class ModelTest(unittest.TestCase):
     def setUp(self):
-        self.model = tfliteModel('/workspaces/python-3/checkdown/model/sign_classifier.tflite')
+        self.model = tfliteModel(utils.get_model_path())
 
     def test_preprocess(self):
         # Create a test image
@@ -31,7 +32,7 @@ class ModelTest(unittest.TestCase):
 
     def test_predict(self):
         # Create a test input data
-        input_data = Image.open('/workspaces/python-3/tests/input.png')
+        input_data = Image.open('tests/input.png')
 
         # Predict the output
         output_data = self.model.predict(input_data)
