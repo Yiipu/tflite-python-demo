@@ -1,0 +1,8 @@
+/*.egg-info/
+/.venv/
+/.vscode/
+/.devcontainer/
+/.github/dependabot.yml
+/build/
+*/__pycache__/
+requirements.txt
