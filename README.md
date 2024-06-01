@@ -30,19 +30,37 @@ checkdown --input tests/input.png
 To start the API server, run the following command:
 
 ```bash
-cd checkdown
-python api.py
+gunicorn -w 4 checkdown.api:app
 ```
 
-The API server will start on `http://localhost:5000`. To use the API, send a POST request to `http://localhost:5000/predict` with your input data.
+The API server will start on `http://localhost:8000`. To use the API, send a POST request to `http://localhost:8000/predict` with your input data.
 
 example:
 ```bash
-curl -X POST -F "file=@tests/input.png" http://localhost:5000/predict
+curl -X POST -F "file=@tests/input.png" http://localhost:8000/predict
 ```
 
 > note that you should replace `tests/input.png` with your own image file.
 
 ### Docker
 
-[TODO]
+To run the API server in a Docker container, first build the image:
+
+```bash
+docker build -t checkdown -f docker/api.dockerfile .
+```
+
+Then, run the container:
+
+```bash
+docker run -p 4000:8000 -it checkdown
+```
+
+> note that you can replace `4000` with any port you like. this will be the host port that the container will be mapped to.
+
+you can also use the cli in the docker container:
+
+```bash
+docker run -it checkdown bash
+checkdown --input tests/input.png
+```

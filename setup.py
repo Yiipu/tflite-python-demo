@@ -20,7 +20,8 @@ setup(
         'tflite_runtime>=2.5.0',
     ],
     extras_require={
-        'api': ['flask>=1.1.2'],
+        'api': ['flask>=1.1.2',
+                'gunicorn>=20.0.4'],
     },
     entry_points={
         'console_scripts': [

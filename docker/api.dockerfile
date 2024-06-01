@@ -1,9 +1,6 @@
-FROM python:3.10-slim-buster
+FROM python:3.9.19
 WORKDIR /app
 ADD . /app
-
-RUN pip install -e .[api]
-
-EXPOSE 5000
-
-CMD ["python", "checkdown/api.py"]
+RUN pip install .[api]
+EXPOSE 8000
+CMD ["gunicorn", "-w 4", "checkdown.api:app"]
