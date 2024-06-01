@@ -9,6 +9,10 @@ def main():
     parser.add_argument('--model',default=default_model_path, type=str, help='Path to the model file')
     args = parser.parse_args()
 
+    if args.input is None:
+        parser.print_help()
+        return
+
     from checkdown.cli import main
     main(args)
 
